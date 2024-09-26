@@ -1,3 +1,3 @@
 function Generate-DummyData {
-    write-output "123"   
+    write-output "123A"   
 }
