@@ -1,0 +1,26 @@
+name: Test PowerShell Script
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Install Pester
+        run: Install-Module -Name Pester -Force -SkipPublisherCheck
+        shell: pwsh
+
+      - name: Run Pester Tests
+        run: Invoke-Pester -Script '.\generate_data.Tests.ps1' -EnableExit
+        shell: pwsh
